@@ -1,0 +1,7 @@
+*.csproj
+*.sln
+*.unityproj
+*.suo
+/My First Unity Game/Library/*
+/My First Unity Game/Temp/*
+/My First Unity Game/obj/*
