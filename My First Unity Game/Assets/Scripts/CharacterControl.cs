@@ -11,6 +11,7 @@ public class CharacterControl : MonoBehaviour
     public float jumpHeight = 8f;
     public float jumpBoost = 1.5f;
     public float gravity = 20f;
+    public int health = 100;
 
     private Vector3 moveDirection = Vector3.zero;
 
@@ -36,6 +37,13 @@ public class CharacterControl : MonoBehaviour
         controller.Move(moveDirection * moveSpeed * Time.deltaTime);
 
         transform.Rotate(Vector3.up * Time.deltaTime * rotSpeed * Input.GetAxis("Mouse X"));
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Hit");
+        if (other.gameObject.tag.Equals("Bullet"))
+            health -= 10;
     }
 
 }

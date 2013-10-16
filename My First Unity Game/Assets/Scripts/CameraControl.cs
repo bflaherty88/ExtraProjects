@@ -15,18 +15,23 @@ public class CameraControl : MonoBehaviour {
 	
 	}
 	
-	void Update () 
+	void Update ()
     {
-        if (transform.localRotation.x < 0.5 && Input.GetAxis("Mouse Y") < 0f)
-            transform.RotateAround(transform.parent.position, -transform.parent.right, Input.GetAxis("Mouse Y"));
-        else if (transform.localRotation.x > -0.2 && Input.GetAxis("Mouse Y") > 0f)
-            transform.RotateAround(transform.parent.position, -transform.parent.right, Input.GetAxis("Mouse Y"));
+        if (Time.timeScale != 0)
+        {
+            if (transform.localRotation.x < 0.5 && Input.GetAxis("Mouse Y") < 0f)
+                transform.RotateAround(transform.parent.position, -transform.parent.right, Input.GetAxis("Mouse Y"));
+            else if (transform.localRotation.x > -0.2 && Input.GetAxis("Mouse Y") > 0f)
+                transform.RotateAround(transform.parent.position, -transform.parent.right, Input.GetAxis("Mouse Y"));
+        }
 
         if (Input.GetButtonDown("Fire1"))
             StartCoroutine(fire());
 
         Debug.DrawRay(transform.position, transform.forward * 100);
-	}
+
+        
+    }
 
     IEnumerator fire()
     {
@@ -35,7 +40,6 @@ public class CameraControl : MonoBehaviour {
         else
         {
             aimed = Physics.Raycast(transform.position, transform.forward, out target);
-            Debug.Log(aimed.ToString());
             firing = true;
             recoiling = true;
             yield return new WaitForSeconds(recoilTime);

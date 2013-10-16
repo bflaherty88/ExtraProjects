@@ -14,9 +14,12 @@ public class GunControl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
-        if (transform.localRotation.x < 0.5 && Input.GetAxis("Mouse Y") < 0f)
-            transform.RotateAround(transform.parent.position, -transform.parent.right, Input.GetAxis("Mouse Y"));
-        else if (transform.localRotation.x > -0.2 && Input.GetAxis("Mouse Y") > 0f)
-            transform.RotateAround(transform.parent.position, -transform.parent.right, Input.GetAxis("Mouse Y"));
+        if (Time.timeScale != 0)
+        {
+            if (transform.localRotation.x < 0.5 && Input.GetAxis("Mouse Y") < 0f)
+                transform.RotateAround(transform.parent.position, -transform.parent.right, Input.GetAxis("Mouse Y"));
+            else if (transform.localRotation.x > -0.2 && Input.GetAxis("Mouse Y") > 0f)
+                transform.RotateAround(transform.parent.position, -transform.parent.right, Input.GetAxis("Mouse Y"));
+        }
 	}
 }

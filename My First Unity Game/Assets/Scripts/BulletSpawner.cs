@@ -26,6 +26,7 @@ public class BulletSpawner : MonoBehaviour
                 Instantiate(slug, transform.position, transform.rotation);
             else
                 Instantiate(slug, transform.position, mainCam.transform.rotation);
+            audio.Play();
             mainCamController.firing = false;
         }
 	}
