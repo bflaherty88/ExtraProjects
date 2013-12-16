@@ -38,12 +38,4 @@ public class CharacterControl : MonoBehaviour
 
         transform.Rotate(Vector3.up * Time.deltaTime * rotSpeed * Input.GetAxis("Mouse X"));
     }
-
-    void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("Hit");
-        if (other.gameObject.tag.Equals("Bullet"))
-            health -= 10;
-    }
-
 }

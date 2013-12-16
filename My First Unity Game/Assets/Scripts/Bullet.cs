@@ -4,9 +4,11 @@ using System.Collections;
 public class Bullet : MonoBehaviour {
 
     public int bulletSpeed = 20;
+    public int dam = 5;
 
     protected float rayLength;
     protected RaycastHit hit;
+    protected bool struck = false;
 
 	// Use this for initialization
 	void Start () 
@@ -18,22 +20,26 @@ public class Bullet : MonoBehaviour {
     {
         transform.Translate(Vector3.forward * bulletSpeed * Time.deltaTime);
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, rayLength))
-            Destroy(this.gameObject);
+        {
+            if (!hit.collider.isTrigger)
+            {
+                Destroy(this.gameObject);
+                struck = true;
+            }
+        }
 	}
 
     void OnDestroy()
     {
-        if (!hit.Equals(null))
+        if (struck)
         {
             if (hit.collider.gameObject.tag.Equals("Player"))
             {
-                hit.collider.gameObject.GetComponent<CharacterControl>().health -= 5;
-                Debug.Log("Ouch");
+                hit.collider.gameObject.GetComponent<CharacterControl>().health -= dam;
             }
             if (hit.collider.gameObject.tag.Equals("Target"))
             {
                 Destroy(hit.collider.gameObject);
-                Debug.Log("Poof");
             }
         }
     }

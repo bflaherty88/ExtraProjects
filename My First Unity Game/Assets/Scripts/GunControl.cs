@@ -16,9 +16,9 @@ public class GunControl : MonoBehaviour {
     {
         if (Time.timeScale != 0)
         {
-            if (transform.localRotation.x < 0.5 && Input.GetAxis("Mouse Y") < 0f)
+            if ((transform.localEulerAngles.x < 60 || transform.localEulerAngles.x >= 270) && Input.GetAxis("Mouse Y") < 0f)
                 transform.RotateAround(transform.parent.position, -transform.parent.right, Input.GetAxis("Mouse Y"));
-            else if (transform.localRotation.x > -0.2 && Input.GetAxis("Mouse Y") > 0f)
+            else if ((transform.localEulerAngles.x > 300 || transform.localEulerAngles.x <= 70) && Input.GetAxis("Mouse Y") > 0f)
                 transform.RotateAround(transform.parent.position, -transform.parent.right, Input.GetAxis("Mouse Y"));
         }
 	}
